@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>在线考试系统</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+    <script src="static/assets/js/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Header -->
+        <header id="header">
+            <div class="logo">
+                <span class="icon fa-diamond"></span>
+            </div>
+            <div class="content">
+                <div class="inner">
+                    <h1>在线考试系统</h1>
+                    <p>
+                        Python在线考试系统Python在线考试系统Python在线考试系统Python在线考试系统Python在线考试系统<br /> Python在线考试系统Python在线考试系统Python在线考试系统Python在线考试系统
+                    </p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#is_login">登录</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="main">
+            <article id="is_login">
+                <h2 class="major">登录</h2>
+                <form action="" onsubmit="return check_login()" method="POST">
+                    <div class="field half first">
+                        <label for="name">用户名：</label>
+                        <input type="text" name="username" id="username" />
+                    </div>
+                    <div class="field half first">
+                        <label for="password">密&nbsp;码：</label>
+                        <input type="password" name="password" id="password" />
+                    </div>
+                    <div class="field half first">
+                        <label for="user_type">用户种类：</label>
+                        <select name="user_type" id="user_type">
+                                <option value="1">学生</option>
+                                <option value="2">教师</option>
+                        </select>
+                    </div>
+                    <div class="field half first">
+                        <div style="width: 200px;height: 47px;">
+                            <img id="code_img" src=""
+                                 style="width: 101px;height: 44px;" alt="">
+                        </div>
+                        <input type="text" style="width: 107px;" id="code" name="code" placeholder="验证码" value="">
+                    </div>
+                    <div class="field">&nbsp;</div>
+                    <div align="center">
+                        <input type="submit" value="登录">
+                    </div>
+                </form>
+            </article>
+        </div>
+
+        <script>
+            $(function(){
+                $img = $("#code_img")
+                    $.get(
+                        '/get_code',
+                        {},
+                        function(data){
+                            //console.log(data)
+                            $img.attr("src","data:image/png;base64,"+data);
+                        }
+                    )
+                }
+            )
+
+            $img = $("#code_img")
+            $img.bind('click',function(){
+                $img = $("#code_img")
+                $.get(
+                    '/get_code',
+                    {},
+                    function(data){
+                        //console.log(data)
+                        $img.attr("src","data:image/png;base64,"+data);
+                    }
+                )
+            })
+        </script>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright">&copy; 达内: <a href="http://www.tmooc.cn">AID1907</a>.</p>
+        </footer>
+
+    </div>
+
+    <!-- BG -->
+    <div id="bg"></div>
+
+    <!-- Scripts -->
+    <script src="static/assets/js/skel.min.js"></script>
+    <script src="static/assets/js/util.js"></script>
+    <script src="static/assets/js/main.js"></script>
+    <script>
+        function check_login() {
+            $username = $('#username')
+            $password = $('#password')
+            $code = $('#code')
+                // alert($username.val())
+            if ($username.val() == "") {
+                $username.focus()
+                return false
+            } else if ($password.val() == "") {
+                $password.focus()
+                return false
+            } else if ($code.val() == "") {
+                $code.focus()
+                return false
+            }
+            if ($("#user_type").val() == "1") {
+                $("form").attr("action", "studentLogin/index")
+            } else if ($("#user_type").val() == "2") {
+                $("form").attr("action", "teacherLogin/index")
+            }
+            return true
+        }
+
+        $("#code_img").bind('click',function(){
+        //console.log('1')
+            $.ajax({
+                <!--url:'static/verify_code_imgs/{{today_str}}/{{filename}}.png',-->
+                data:{},
+                dataType:'',
+                type: "GET",
+                success:function(data){
+
+                    }
+            })
+        })
+
+    </script>
+
+</body>
+
+</html>

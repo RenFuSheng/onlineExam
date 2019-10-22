@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>学生管理界面</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/static/assets/css/main.css"/>
+</head>
+
+<body>
+<div id="wrapper">
+    <header id="header">
+        <div class="logo">
+            <span class="icon fa-diamond"></span>
+        </div>
+        <div class="content">
+            <div class="inner">
+                <h1>考试系统学生首页</h1>
+                <h3> 欢迎您{{ student.name }}</h3>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#person_info">个人信息</a></li>
+                <li><a href="#exam_info">考试信息</a></li>
+                <li><a href="#score_info">成绩信息</a></li>
+                <li><a href="/">退出</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="main">
+        <article id="person_info">
+            <h2 class="major">个人信息</h2>
+            <div id="home" class="container tab-pane active"><br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>属性</th>
+                        <th>信息</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>学号</td>
+                        <td>{{ student.id }}</td>
+                    </tr>
+                    <tr class="table-primary">
+                        <td>姓名</td>
+                        <td>{{ student.name }}</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td>性别</td>
+                        <td>{{ student.sex }}</td>
+                    </tr>
+                    <tr class="table-danger">
+                        <td>学院</td>
+                        <td>{{ student.dept }}</td>
+                    </tr>
+
+                    <tr class="table-success">
+                        <td>专业</td>
+                        <td>{{ student.major }}</td>
+                    </tr>
+
+                    <tr class="table-warning">
+                        <td>邮箱地址</td>
+                        <td>{{ student.email }}</td>
+                    </tr>
+                    <tr class="table-active">
+                        <td>出生日期</td>
+                        <td>{{ student.birth }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article id="score_info">
+            <div id="menu2" class="container tab-pane fade"><br>
+                <h3>成绩信息</h3>
+                <p></p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>科目</th>
+                        <th>成绩</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for grade1 in grade %}
+                    <tr class="table-primary">
+                        <td>{{ student.name }}</td>
+                        <td>{{ grade1.subject }}</td>
+                        <td>{{ grade1.grade }}</td>
+
+                    </tr>
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article id="exam_info">
+            <div id="menu1" class="container tab-pane fade"><br>
+                <h3>考试信息</h3>
+                <p></p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>考试科目</th>
+                        <th>考试时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# 遍历字典 paper #} {% for paper1 in paper %}
+
+                    <tr class="table-info">
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ paper1.subject }}{{ paper2.subject }}</td>
+                        <td>{{ paper1.examtime }} {{ paper2.examtime }}</td>
+                        <td>
+                            <a id='start_exam'
+                               href="/studentLogin/startExam?sid={{ student.id }}&subject={{ student.major }}"></a>
+                            <button onclick="$('#start_exam')[0].click()" class="btn btn-primary"
+                                    id="toExam+{{ paper1.subject }}">开始考试
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p class="copyright">&copy; 达内: <a href="https://www.tmooc.cn" style="border-bottom:none">AID1907</a>.</p>
+    </footer>
+
+</div>
+
+<!-- BG -->
+<div id="bg"></div>
+
+<!-- Scripts -->
+<script src="../static/assets/js/jquery.min.js"></script>
+<script src="../static/assets/js/skel.min.js"></script>
+<script src="../static/assets/js/util.js"></script>
+<script src="../static/assets/js/main.js"></script>
+
+</body>
+
+</html>
